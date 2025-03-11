@@ -9,6 +9,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 
 public class PasswordGeneratorController {
+    //declaracion de los componentes de la interfaz
     @FXML
     private TextField passwordField;
     @FXML
@@ -17,7 +18,7 @@ public class PasswordGeneratorController {
     private CheckBox uppercaseCheckBox, lowercaseCheckBox, digitsCheckBox, specialCharCheckBox;
     @FXML
     private Label strengthLabel;
-
+    //declaracion del generador de contraseñas
     private PasswordGenerator passwordGenerator = new PasswordGenerator();
 
     public void initialize() {
@@ -49,7 +50,7 @@ public class PasswordGeneratorController {
             passwordField.getStyleClass().add("security-level-" + selectedCount);
         }
     }
-
+    //generar la contraseña
     @FXML
     private void onGeneratePassword() {
         int length = lengthComboBox.getValue();
@@ -84,7 +85,7 @@ public class PasswordGeneratorController {
             strengthLabel.setText("");
         }
     }
-
+    // funcion paracopiar la contraseña
     @FXML
     private void onCopyPassword() {
         String password = passwordField.getText();

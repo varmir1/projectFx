@@ -4,12 +4,13 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class PasswordGenerator {
-
+    //declaracion de las opciones de la contraseña
     private static final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
     private static final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String DIGITS = "0123456789";
     private static final String SPECIAL_CHARS = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/";
-
+    
+    //generar la contraseña
     public String generatePassword(int length, boolean includeUppercase, boolean includeLowercase,
                                    boolean includeDigits, boolean includeSpecialChars) {
         StringBuilder allowedChars = new StringBuilder();

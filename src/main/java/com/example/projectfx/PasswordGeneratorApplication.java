@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+//clase principal de la aplicacion
 public class PasswordGeneratorApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
