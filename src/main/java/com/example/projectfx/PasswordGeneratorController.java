@@ -25,7 +25,7 @@ public class PasswordGeneratorController {
         lengthComboBox.getItems().addAll(8, 10, 12, 16);
         lengthComboBox.setValue(12);
 
-        // Añadir listeners a todos los checkboxes
+        //actualizar el nivel de seguridad
         uppercaseCheckBox.selectedProperty().addListener((obs, oldVal, newVal) -> updateSecurityLevel());
         lowercaseCheckBox.selectedProperty().addListener((obs, oldVal, newVal) -> updateSecurityLevel());
         digitsCheckBox.selectedProperty().addListener((obs, oldVal, newVal) -> updateSecurityLevel());
@@ -58,6 +58,16 @@ public class PasswordGeneratorController {
         boolean includeLowercase = lowercaseCheckBox.isSelected();
         boolean includeDigits = digitsCheckBox.isSelected();
         boolean includeSpecialChars = specialCharCheckBox.isSelected();
+
+        // Si no hay ninguna opción seleccionada, seleccionar todas
+        if (!includeUppercase && !includeLowercase && !includeDigits && !includeSpecialChars) {
+            includeUppercase = includeLowercase = includeDigits = includeSpecialChars = true;
+            // Actualizar visualmente los checkboxes
+            uppercaseCheckBox.setSelected(true);
+            lowercaseCheckBox.setSelected(true);
+            digitsCheckBox.setSelected(true);
+            specialCharCheckBox.setSelected(true);
+        }
 
         String password;
         boolean isValid;
