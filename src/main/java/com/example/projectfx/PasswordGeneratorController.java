@@ -15,6 +15,8 @@ public class PasswordGeneratorController {
     private ComboBox<Integer> lengthComboBox;
     @FXML
     private CheckBox uppercaseCheckBox, lowercaseCheckBox, digitsCheckBox, specialCharCheckBox;
+    @FXML
+    private Label strengthLabel;
 
     private PasswordGenerator passwordGenerator = new PasswordGenerator();
 
@@ -56,9 +58,31 @@ public class PasswordGeneratorController {
         boolean includeDigits = digitsCheckBox.isSelected();
         boolean includeSpecialChars = specialCharCheckBox.isSelected();
 
-        String password = passwordGenerator.generatePassword(length, includeUppercase, includeLowercase, includeDigits, includeSpecialChars);
+        String password;
+        boolean isValid;
+        
+        do {
+            password = passwordGenerator.generatePassword(length, includeUppercase, includeLowercase, includeDigits, includeSpecialChars);
+            
+            // Verificar que la contraseña contiene al menos un carácter de cada tipo seleccionado
+            isValid = true;
+            if (includeUppercase && !PasswordValidator.hasUpperCase(password)) isValid = false;
+            if (includeLowercase && !PasswordValidator.hasLowerCase(password)) isValid = false;
+            if (includeDigits && !PasswordValidator.hasNumber(password)) isValid = false;
+            if (includeSpecialChars && !PasswordValidator.hasSpecialChar(password)) isValid = false;
+            
+        } while (!isValid);
+
         passwordField.setText(password);
         updateSecurityLevel();
+
+        // Validar si la contraseña cumple todos los requisitos
+        if (PasswordValidator.validatePassword(password)) {
+            strengthLabel.setText("PASSWORD TOO STRONG");
+            strengthLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+        } else {
+            strengthLabel.setText("");
+        }
     }
 
     @FXML
